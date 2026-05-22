@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚦 Traffic Sign Detection</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🚦 Traffic Sign Detection</h1>
+                <p>Phát hiện và phân loại biển báo giao thông bằng AI</p>
+            </div>
+            <button id="themeToggle" class="theme-toggle">🌙</button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Tabs Navigation -->
+            <div class="tabs">
+                <button class="tab-button active" data-tab="image">📷 Ảnh</button>
+                <button class="tab-button" data-tab="video">🎬 Video</button>
+                <button class="tab-button" data-tab="webcam">📹 Webcam</button>
+            </div>
+
+            <!-- Image Tab -->
+            <section id="image" class="tab-content active">
+                <div class="upload-area" id="imageUploadArea">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <h3>Chọn hoặc kéo thả ảnh</h3>
+                    <p>Hỗ trợ: JPG, PNG, GIF (Tối đa 50MB)</p>
+                    <input type="file" id="imageInput" accept="image/*" hidden>
+                </div>
+                <div id="imagePreviewContainer" class="preview-container hidden">
+                    <div class="preview-section">
+                        <h3>Ảnh gốc</h3>
+                        <img id="imagePreview" src="" alt="Preview">
+                    </div>
+                    <div class="preview-section">
+                        <h3>Kết quả phát hiện</h3>
+                        <canvas id="imageResultCanvas"></canvas>
+                    </div>
+                </div>
+                <div class="stats-container" id="imageStatsContainer"></div>
+            </section>
+
+            <!-- Video Tab -->
+            <section id="video" class="tab-content">
+                <div class="upload-area" id="videoUploadArea">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                    </svg>
+                    <h3>Chọn hoặc kéo thả video</h3>
+                    <p>Hỗ trợ: MP4, AVI, MOV (Tối đa 500MB)</p>
+                    <input type="file" id="videoInput" accept="video/*" hidden>
+                </div>
+                <div id="videoProcessingContainer" class="processing-container hidden">
+                    <div class="progress-bar">
+                        <div id="videoProgress" class="progress-fill"></div>
+                    </div>
+                    <p id="videoProgressText">Đang xử lý: 0%</p>
+                    <button id="videoCancelBtn" class="btn btn-secondary">Hủy</button>
+                </div>
+                <div id="videoResultContainer" class="result-container hidden">
+                    <video id="videoResult" controls></video>
+                    <button id="videoDownloadBtn" class="btn btn-primary">⬇️ Tải xuống video</button>
+                </div>
+                <div class="stats-container" id="videoStatsContainer"></div>
+            </section>
+
+            <!-- Webcam Tab -->
+            <section id="webcam" class="tab-content">
+                <div class="webcam-container">
+                    <div class="webcam-wrapper">
+                        <video id="webcamVideo" playsinline></video>
+                        <canvas id="webcamCanvas"></canvas>
+                        <div class="webcam-controls">
+                            <button id="webcamStartBtn" class="btn btn-primary">▶️ Bắt đầu</button>
+                            <button id="webcamStopBtn" class="btn btn-secondary hidden">⏹️ Dừng</button>
+                            <button id="webcamSnapshotBtn" class="btn btn-success hidden">📸 Chụp ảnh</button>
+                        </div>
+                    </div>
+                    <div class="webcam-stats" id="webcamStatsContainer"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Stats Section -->
+        <section class="stats-section" id="statsSection" style="display: none;">
+            <h2>📊 Thống kê phát hiện</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Tổng biển báo</h4>
+                    <p id="totalSigns" class="stat-value">0</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Độ tin cậy trung bình</h4>
+                    <p id="avgConfidence" class="stat-value">0%</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Loại biển phát hiện</h4>
+                    <p id="signTypes" class="stat-value">-</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner hidden">
+        <div class="spinner"></div>
+        <p>Đang xử lý...</p>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/detection.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
