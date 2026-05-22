@@ -1,0 +1,29 @@
+# Backend Requirements
+
+# Web Framework
+fastapi==0.104.1
+uvicorn==0.24.0
+python-multipart==0.0.6
+
+# ML & CV
+torch==2.0.1
+torchvision==0.15.2
+opencv-python==4.8.1.78
+yolov8==8.0.235
+ultralytics==8.0.235
+
+# Image Processing
+pillow==10.0.0
+numpy==1.24.3
+
+# Database
+sqlalchemy==2.0.21
+pydantic==2.4.2
+
+# Utilities
+python-dotenv==1.0.0
+aiofiles==23.2.1
+requests==2.31.0
+
+# CORS
+fastapi-cors==0.0.6
